@@ -179,13 +179,15 @@ def predict_single(
             if os.path.exists(model_name_or_path)
             else model_name_or_path,
             return_tensors="pt",
+            local_files_only=True,
         )
 
     if model is None:
         model = AutoModelForSeq2SeqLM.from_pretrained(
             os.path.abspath(model_name_or_path)
             if os.path.exists(model_name_or_path)
-            else model_name_or_path
+            else model_name_or_path,
+            local_files_only=True,
         ).to(device)
         model.eval()
         model = torch.compile(model)

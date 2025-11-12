@@ -65,8 +65,9 @@ def generate_embedding(
         if os.path.exists(model_name_or_path)
         else model_name_or_path,
         return_tensors="pt",
+        local_files_only=True,
     )
-    model = T5EncoderModel.from_pretrained(model_name_or_path).to(device)
+    model = T5EncoderModel.from_pretrained(model_name_or_path, local_files_only=True).to(device)
     model.eval()
 
     if isinstance(input_data, str):
